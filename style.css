@@ -45,17 +45,17 @@ input {
 }
 .weak {
     width: 33%;
-    background-color: #F49B20;
+    background-color: #F4661F;
 }
 .weak-text {
-    color: #F49B20;
+    color: #F4661F;
 }
 .average {
     width: 66%;
-    background-color: #F4661F;
+    background-color: #F49B20;
 }
 .average-text {
-    color: #F4661F;
+    color: #F49B20;
 }
 .strong {
     width: 100%;
