@@ -37,8 +37,10 @@ function checkStrength(event) {
   var suggestions = result.feedback.suggestions;
 
   var level = 0;
-  for(var i =1; pass.length >= 8 && i<levels.length; i++) 
+  for(var i =1; pass.length && i<levels.length; i++) 
     if (levels[i].guesses < guesses) level=i
+
+  if (pass.length < 8 && level == 3) level = 2;
 
   klass = guesses >= levels[level].guesses ? levels[level] : klass
 
