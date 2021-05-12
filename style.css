@@ -1,0 +1,66 @@
+span {
+    font-family: verdana;
+    font-size: 10px;
+}
+input {
+    margin-top: 0.5rem;
+}
+.regex-entry {
+    margin: 5 5px;
+}
+.regex-entry input {
+    display: inline-block;
+    width: 100%;
+}
+.reg-error {
+    float: right;
+    margin-right: 5px;
+    color: #F4661F;
+    font-weight: bold;
+}
+#passstrength {
+    width: 80%;
+    height: 10px;
+    margin: 2px 0px;
+    background-color: #25404E26
+}
+#progress {
+    margin: 5px 0px;
+}
+#progress span, #progress div {
+    float: left;
+}
+#progress span {
+    margin: 0 5px;
+}
+#bar {
+    height: 10px;
+}
+.too-weak {
+    width: 25%;
+    background-color: #25404E00;
+}
+.too-weak-text {
+    color: #25404E;
+}
+.weak {
+    width: 33%;
+    background-color: #F49B20;
+}
+.weak-text {
+    color: #F49B20;
+}
+.average {
+    width: 66%;
+    background-color: #F4661F;
+}
+.average-text {
+    color: #F4661F;
+}
+.strong {
+    width: 100%;
+    background-color: #07A699;
+}
+.strong-text {
+    color: #07A699;
+}
