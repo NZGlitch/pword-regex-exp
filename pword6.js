@@ -10,19 +10,19 @@ var levels = [
     //Weak = 6 or more characters
    "text" : "Weak",
     "class" : "weak",
-    "guesses" : 10000
+    "guesses" : 100000
   },  
   {
     //Average = 8 or more characters
     "text" : "could be stronger",
     "class" : "average",
-    "guesses" : 1000000
+    "guesses" : 10000000
   }, 
   {
     //Strong = 10 or more characters
     "text" : "Strong",
     "class" : "strong",
-    "guesses" : 100000000
+    "guesses" : 1000000000
   }, 
  ];
 
