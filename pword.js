@@ -1,4 +1,6 @@
 //DEFAULT VALUES
+
+var default_suggest="Use 8 or more characters with a mix of letters, numbers and symbols";
 var levels = [ 
   {
     "text" : "Too weak",
@@ -8,19 +10,19 @@ var levels = [
     //Weak = 6 or more characters
    "text" : "Weak",
     "class" : "weak",
-    "regex" : new RegExp(".{6,}")
+    "guesses" : 100
   },  
   {
     //Average = 8 or more characters
     "text" : "could be stronger",
     "class" : "average",
-    "regex" : new RegExp(".{8,}")
+    "guesses" : 10000
   }, 
   {
     //Strong = 10 or more characters
     "text" : "Strong",
     "class" : "strong",
-    "regex" : new RegExp(".{10,}")
+    "guesses" : 1000000
   }, 
  ];
 
@@ -30,40 +32,41 @@ function checkStrength(event) {
   var bar = document.querySelector('#bar');
   var pass = document.querySelector('#pass').value;
 
+  var result = zxcvbn(pass);
+  var guesses = result.guesses;
+  var suggestions = result.feedback.suggestions;
+
+  var level = 0;
   for(var i =1; pass.length && i<levels.length; i++) 
-    klass = levels[i].regex.test(pass) ? levels[i] : klass
+    if (levels[i].guesses < guesses) level=i
+
+  klass = guesses >= levels[level].guesses ? levels[level] : klass
+
   document.querySelector('#bar').className = klass.class;
   document.querySelector('#str-text').className = klass.class+"-text";
   document.querySelector('#str-text').innerHTML = klass.text;
+  
+  var suggest = default_suggest;
+  if (level == 3) suggest = "";
+  // if (pass.length >= 8) {
+  //   console.log(pass.length);
+    
+  //   switch (level) {
+  //     case 0:     break;
+  //     case 1,2:   if (suggestions.length > 0) suggest = suggestions[0];
+  //                 break;
+  //     case 3: suggest = ""; 
+  //                 break;
+  //   }
+  // }
+
+  document.querySelector("#suggest").innerHTML = suggest;
+
   return true;
-}
-
-// Copies the regex's from the input boxes into the levels array. Displays error if regex cant compile
-function loadReg(event) {
-  var reg = null; var flags = null; var pattern = null; var inputstring = null;
-
-  for (var i=1; i<=3; i++)
-    try {
-      inputstring = document.querySelector("#reg" + i).value
-      flags = inputstring.replace(/.*\/([gimy]*)$/, '$1');
-      pattern = inputstring.replace(new RegExp('^/(.*?)/'+flags+'$'), '$1');
-      levels[i].regex = new RegExp(pattern, flags);
-      document.querySelector("#reg"+i+"-err").style.display = "none";
-    } catch (err) {
-      document.querySelector("#reg"+i+"-err").style.display = "inline-block";
-    }
-  checkStrength(null);
 }
 
 window.onload = function(){
   //Key listener for password entry
   document.querySelector('#pass').onkeyup = checkStrength;
-  for (var i=1; i<=3; i++) {
-    //Copy defaults into the input boxes & attach key listener
-    reg = document.querySelector("#reg"+i);
-    reg.onkeyup = loadReg;
-    reg.value=levels[i].regex
-  }
-  //Initial run
-  loadReg(null);
+  checkStrength(null);
 };
