@@ -7,26 +7,23 @@ var levels = [
     "class" : "too-weak",
   }, 
   {
-    //Weak = 6 or more characters
    "text" : "Weak",
     "class" : "weak",
     "guesses" : 10000
   },  
   {
-    //Average = 8 or more characters
     "text" : "could be stronger",
     "class" : "average",
     "guesses" : 1000000
   }, 
   {
-    //Strong = 10 or more characters
     "text" : "Strong",
     "class" : "strong",
     "guesses" : 100000000
   }, 
  ];
 
-// Use the loaded regex's to caluclate the strength of the text in the input box
+// Check the strength of the current input using zxcvbn
 function checkStrength(event) {
   var klass = levels[0];
   var bar = document.querySelector('#bar');
@@ -50,18 +47,6 @@ function checkStrength(event) {
   
   var suggest = default_suggest;
   if (level == 3) suggest = "";
-  // if (pass.length >= 8) {
-  //   console.log(pass.length);
-    
-  //   switch (level) {
-  //     case 0:     break;
-  //     case 1,2:   if (suggestions.length > 0) suggest = suggestions[0];
-  //                 break;
-  //     case 3: suggest = ""; 
-  //                 break;
-  //   }
-  // }
-
   document.querySelector("#suggest").innerHTML = suggest;
 
   return true;
